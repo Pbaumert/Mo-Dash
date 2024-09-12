@@ -25,7 +25,7 @@ export default client;
 
 
 
-// Replace 'pk_test_51Jxxx' with your actual publishable key
+
 const stripePromise = loadStripe('pk_test_51PyFZ02MJEsHt3b6wcTS8ZNMFVtsMsE6hXok2o0EatGycovjUsPumZU8VBjoFalaqB0rwH5tCpgS6TcciXLZOPC300iuthuRBG');
 
 export default stripePromise;
