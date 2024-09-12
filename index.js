@@ -8,6 +8,10 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
 // JWT Middleware for user authentication
 const authenticate = (req, res, next) => {
   const token = req.headers.authorization;
