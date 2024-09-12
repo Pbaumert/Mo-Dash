@@ -6,7 +6,7 @@ const schema = require('./graphql/schema'); // GraphQL schema
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 // JWT Middleware for user authentication
 const authenticate = (req, res, next) => {
