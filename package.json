@@ -1,0 +1,27 @@
+{
+    "name": "Mo Dash",
+    "version": "1.0.0",
+    "description": "A simple MERN app for BBQ delivery",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "author": "Paul Baumert",
+    "license": "MIT",
+    "dependencies": {
+        "@apollo/client": "^3.11.8",
+        "bcryptjs": "^2.4.3",
+        "dotenv": "^16.4.5",
+        "express": "^4.21.0",
+        "express-graphql": "^0.12.0",
+        "graphql": "^16.9.0",
+        "jsonwebtoken": "^9.0.2",
+        "jwt-decode": "^4.0.0",
+        "mongoose": "^8.6.2",
+        "stripe": "^16.10.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.4"
+    }
+}
