@@ -44,18 +44,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Stripe Webhook for handling payment events
-app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
-  const sig = req.headers['stripe-signature'];
-  
-  let event;
-
-  try {
-    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
-  } catch (err) {
-    console.error('⚠️  Webhook signature verification failed.', err.message);
-    return res.sendStatus(400);
-  }
 
   // Handle the event
   switch (event.type) {
