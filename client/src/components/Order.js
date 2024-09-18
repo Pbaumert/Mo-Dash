@@ -1,26 +1,24 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { PLACE_ORDER } from '../utils/mutations';
-import { loadStripe } from '@stripe/stripe-js';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const stripePromise = loadStripe('your-stripe-public-key-here');
+function Order() {
+  const navigate = useNavigate();
 
-function Order({ packageId }) {
-  const [order, setOrder] = useState(null);
-  const [placeOrder] = useMutation(PLACE_ORDER);
+  const handleOrder = () => {
+    // Simulate a successful order
+    console.log('Payment successful!');
 
-  const handleOrder = async () => {
-    const { data } = await placeOrder({ variables: { packageId } });
-    const stripe = await stripePromise;
-    await stripe.redirectToCheckout({ sessionId: data.createPaymentSession.id });
+    // Redirect to Thank You page
+    navigate('/thank-you');
   };
 
   return (
     <div>
       <h2>Complete your order</h2>
-      <button onClick={handleOrder}>Pay Now</button>
+      <button onClick={handleOrder}>Pay Now (Simulated)</button>
     </div>
   );
 }
 
 export default Order;
+
