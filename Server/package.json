@@ -1,34 +1,22 @@
 {
-    "name": "mo-dash",
-    "version": "1.0.0",
-    "description": "A simple MERN app for BBQ delivery",
-    "main": "index.js",
-    "private": true,
-    "scripts": {
-      "start": "react-scripts start",
-      "build": "react-scripts build",
-      "test": "react-scripts test",
-      "eject": "react-scripts eject"
-    },
-    "author": "Paul Baumert",
-    "license": "MIT",
-    "dependencies": {
-      "react": "^18.0.0",
-      "react-dom": "^18.0.0",
-      "react-scripts": "5.0.1",
-      "@apollo/client": "^3.11.8",
-      "bcryptjs": "^2.4.3",
-      "dotenv": "^16.4.5",
-      "express": "^4.21.0",
-      "express-graphql": "^0.12.0",
-      "graphql": "^16.9.0",
-      "jsonwebtoken": "^9.0.2",
-      "jwt-decode": "^4.0.0",
-      "mongoose": "^8.6.2",
-      "stripe": "^16.10.0"
-    },
-    "devDependencies": {
-      "nodemon": "^3.1.4"
-    }
+  "name": "bbq-delivery-server",
+  "version": "1.0.0",
+  "description": "Server side for the BBQ Delivery app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.25.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.12",
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
   }
-  
+}

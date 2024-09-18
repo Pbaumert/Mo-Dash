@@ -1,53 +1,29 @@
-const { GraphQLString, GraphQLObjectType } = require('graphql');
-const User = require('./User');
-const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
-// Create User Type
-const UserType = new GraphQLObjectType({
-  name: 'User',
-  fields: () => ({
-    id: { type: GraphQLString },
-    name: { type: GraphQLString },
-    email: { type: GraphQLString }
-  })
+const UserSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
 });
 
-// Queries
-const userQueries = {
-  // Add more queries here like getUserById or getUsers
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+UserSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
 };
 
-// Mutations (Sign Up, Login)
-const userMutations = {
-  signup: {
-    type: UserType,
-    args: {
-      name: { type: GraphQLString },
-      email: { type: GraphQLString },
-      password: { type: GraphQLString }
-    },
-    async resolve(parent, args) {
-      const user = new User(args);
-      await user.save();
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
-      return { ...user._doc, token };
-    }
-  },
-  login: {
-    type: UserType,
-    args: {
-      email: { type: GraphQLString },
-      password: { type: GraphQLString }
-    },
-    async resolve(parent, args) {
-      const user = await User.findOne({ email: args.email });
-      if (!user || !(await bcrypt.compare(args.password, user.password))) {
-        throw new Error('Invalid credentials');
-      }
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
-      return { ...user._doc, token };
-    }
-  }
-};
+const User = mongoose.model('User', UserSchema);
 
-module.exports = { userQueries, userMutations };
+module.exports = User;
